@@ -1,18 +1,84 @@
-# Salesforce DX Project: Next Steps
+# Salesforce Cloud Hub
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+A comprehensive Salesforce engineering repository for Apex, LWC (Lightning Web Components), CPQ, integrations, automation and reusable architecture patterns.
 
-## How Do You Plan to Deploy Your Changes?
+## Project Structure
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+```
+sf-cloud-hub/
+├── force-app/
+│   └── main/
+│       └── default/
+│           ├── classes/              # Apex classes
+│           ├── lwc/                  # Lightning Web Components
+│           ├── objects/              # Custom objects
+│           ├── pages/                # Visualforce pages
+│           ├── triggers/             # Apex triggers
+│           ├── flows/                # Flow definitions
+│           ├── staticresources/      # Static resources
+│           └── ...
+├── config/                           # Configuration files
+├── scripts/                          # Deployment scripts
+├── sfdx-project.json                # Salesforce project config
+├── .gitignore                       # Git ignore rules
+└── README.md                        # This file
+```
 
-## Configure Your Salesforce DX Project
+## Getting Started
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+### Prerequisites
+- Salesforce CLI installed: [Install Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli)
+- Node.js 14+
+- Git
 
-## Read All About It
+### Installation
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+1. Clone the repository:
+```bash
+git clone https://github.com/GouravAnand/sf-cloud-hub.git
+cd sf-cloud-hub
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Authenticate with your Salesforce org:
+```bash
+sfdx force:auth:web:login -a myOrg
+```
+
+## Deployment
+
+### Deploy to Org
+```bash
+sfdx force:source:deploy -p force-app --targetusername myOrg
+```
+
+### Deploy Specific Metadata
+```bash
+sfdx force:source:deploy -p force-app/main/default/classes --targetusername myOrg
+```
+
+## Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Test thoroughly
+4. Submit a pull request
+
+## Resources
+
+- [Salesforce Developers](https://developer.salesforce.com)
+- [SFDX CLI Documentation](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/)
+- [Lightning Web Components](https://developer.salesforce.com/docs/component-library/overview/components)
+
+## License
+
+Proprietary - Salesforce Engineering Repository
+
+---
+
+**Author:** GouravAnand  
+**Created:** 2026-10-09
