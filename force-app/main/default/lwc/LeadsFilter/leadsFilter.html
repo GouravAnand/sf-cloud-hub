@@ -1,0 +1,40 @@
+<template>
+  <lightning-card title="Leads Filter">
+    <div class="slds-p-around_medium">
+      <lightning-combobox
+        label="Filter by Status"
+        value={selectedStatus}
+        options={statusOptions}
+        onchange={handleStatusChange}
+      >
+      </lightning-combobox>
+
+      <template if:true={hasLeads}>
+        <div class="slds-m-top_medium">
+          <template for:each={leads} for:item="lead">
+            <article key={lead.Id} class="slds-box slds-m-bottom_small">
+              <p class="slds-text-heading_small">{lead.Name}</p>
+              <p>{lead.Company}</p>
+              <p>Status: {lead.Status}</p>
+              <p>Email: {lead.Email}</p>
+              <p>Phone: {lead.Phone}</p>
+              <p>Owner: {lead.Owner.Name}</p>
+            </article>
+          </template>
+        </div>
+      </template>
+
+      <template if:false={hasLeads}>
+        <div class="slds-m-top_medium slds-text-color_weak">
+          No leads found for the selected status.
+        </div>
+      </template>
+
+      <template if:true={error}>
+        <div class="slds-m-top_medium slds-text-color_error">
+          Unable to load lead data.
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

@@ -1,0 +1,27 @@
+<template>
+  <lightning-card title="Contacts">
+    <div class="slds-p-around_medium">
+      <template if:true={hasContacts}>
+        <lightning-datatable
+          key-field="Id"
+          data={contacts}
+          columns={columns}
+          hide-checkbox-column
+        >
+        </lightning-datatable>
+      </template>
+
+      <template if:false={hasContacts}>
+        <p class="slds-text-color_weak">
+          No contacts found for the selected account.
+        </p>
+      </template>
+
+      <template if:true={error}>
+        <div class="slds-text-color_error slds-m-top_medium">
+          An error occurred while loading contacts.
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

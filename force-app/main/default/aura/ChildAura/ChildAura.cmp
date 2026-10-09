@@ -1,0 +1,81 @@
+<aura:component description="Child Aura Component - Demonstrates Child to Parent and Parent to Child communication">
+    
+    <aura:attribute name="parentMessage" type="String" default="" description="Message received from parent"/>
+    <aura:attribute name="childMessage" type="String" default="Hello from Child!" description="Message from child to parent"/>
+    <aura:attribute name="counter" type="Integer" default="0" description="Counter value to send to parent"/>
+    
+    <!-- Event to send data to parent -->
+    <aura:registerEvent name="childEvent" type="c:ChildEvent"/>
+    
+    <div class="slds-box slds-theme_inverse">
+        <div class="slds-m-bottom_medium">
+            <h2 class="slds-text-heading_large slds-text-color_inverse">
+                <strong>Child Component</strong>
+            </h2>
+        </div>
+        
+        <!-- Display Parent Message Section -->
+        <div class="slds-box slds-theme_alert-texture slds-m-bottom_large">
+            <h3 class="slds-text-heading_small slds-m-bottom_medium">Message from Parent:</h3>
+            <p class="slds-text-color_success slds-text-body_long">
+                <strong>"{!v.parentMessage}"</strong>
+            </p>
+        </div>
+        
+        <!-- Child Message Input Section -->
+        <div class="slds-box slds-theme_shade slds-m-bottom_large">
+            <h3 class="slds-text-heading_small slds-m-bottom_medium">Send Message to Parent:</h3>
+            
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label">Child Message:</label>
+                <div class="slds-form-element__control">
+                    <input aura:id="childMessageInput" 
+                           type="text" 
+                           class="slds-input" 
+                           value="{!v.childMessage}"
+                           placeholder="Enter message to send to parent"/>
+                </div>
+            </div>
+            
+            <button class="slds-button slds-button_success slds-m-bottom_medium"
+                    onclick="{!c.sendMessageToParent}">
+                Send Message to Parent
+            </button>
+        </div>
+        
+        <!-- Counter Section -->
+        <div class="slds-box slds-theme_shade slds-m-bottom_large">
+            <h3 class="slds-text-heading_small slds-m-bottom_medium">Counter Management:</h3>
+            
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label">Current Counter Value:</label>
+                <p class="slds-text-body_long slds-text-color_warning">
+                    <strong>{!v.counter}</strong>
+                </p>
+            </div>
+            
+            <div class="slds-button-group" role="group">
+                <button class="slds-button slds-button_brand"
+                        onclick="{!c.incrementCounter}">
+                    Increment Counter
+                </button>
+                <button class="slds-button slds-button_brand"
+                        onclick="{!c.decrementCounter}">
+                    Decrement Counter
+                </button>
+                <button class="slds-button slds-button_destructive"
+                        onclick="{!c.resetCounter}">
+                    Reset Counter
+                </button>
+            </div>
+        </div>
+        
+        <!-- Send Counter to Parent -->
+        <div class="slds-box slds-theme_alert-texture">
+            <button class="slds-button slds-button_success slds-size_full"
+                    onclick="{!c.sendCounterToParent}">
+                Send Counter Value to Parent
+            </button>
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,48 @@
+<template>
+  <lightning-card title="Platform Event Subscriber">
+    <div class="slds-p-around_medium">
+      <div class="slds-m-bottom_small">
+        <p class="slds-text-body_small">Status: {connectionLabel}</p>
+        <lightning-button
+          class="slds-m-top_small"
+          label={toggleLabel}
+          onclick={handleToggleConnection}
+        >
+        </lightning-button>
+        <lightning-button
+          class="slds-m-top_small slds-m-left_small"
+          variant="neutral"
+          label={childErrorLabel}
+          onclick={handleToggleChildError}
+        >
+        </lightning-button>
+      </div>
+
+      <c-platform-event-subscriber-panel
+        status-label={connectionLabel}
+        event-count={events.length}
+        last-message={latestMessageText}
+        trigger-error={triggerChildError}
+      >
+      </c-platform-event-subscriber-panel>
+
+      <template if:true={hasEvents}>
+        <lightning-datatable
+          key-field="id"
+          data={events}
+          columns={columns}
+          hide-checkbox-column
+        >
+        </lightning-datatable>
+      </template>
+
+      <template if:false={hasEvents}>
+        <p class="slds-text-color_weak">No platform events received yet.</p>
+      </template>
+
+      <template if:true={error}>
+        <div class="slds-text-color_error slds-m-top_medium">{error}</div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

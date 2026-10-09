@@ -1,0 +1,71 @@
+<aura:component description="Parent Aura Component - Demonstrates Parent to Child and Child to Parent communication">
+    
+    <aura:attribute name="parentMessage" type="String" default="Hello from Parent!" description="Message from parent to child"/>
+    <aura:attribute name="childMessage" type="String" default="" description="Message received from child"/>
+    <aura:attribute name="childCount" type="Integer" default="0" description="Counter value received from child"/>
+    
+    <!-- Handler for child event -->
+    <aura:handler name="childEvent" event="c:ChildEvent" action="{!c.handleChildEvent}"/>
+    
+    <div class="slds-box slds-theme_default">
+        <div class="slds-m-bottom_medium">
+            <h1 class="slds-text-heading_large slds-text-color_default">
+                <strong>Parent Component</strong>
+            </h1>
+        </div>
+        
+        <!-- Parent Section -->
+        <div class="slds-box slds-theme_shade slds-m-bottom_large">
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">Parent Attributes</h2>
+            
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label">Update Parent Message to Child:</label>
+                <div class="slds-form-element__control">
+                    <input aura:id="parentMessageInput" 
+                           type="text" 
+                           class="slds-input" 
+                           value="{!v.parentMessage}"
+                           placeholder="Enter message to send to child"/>
+                </div>
+            </div>
+            
+            <button class="slds-button slds-button_brand slds-m-bottom_medium"
+                    onclick="{!c.updateParentMessage}">
+                Update Message
+            </button>
+            
+            <div class="slds-box slds-theme_alert-texture slds-p-around_small">
+                <p><strong>Current Parent Message:</strong></p>
+                <p class="slds-text-color_success">{!v.parentMessage}</p>
+            </div>
+        </div>
+        
+        <!-- Child Component -->
+        <div class="slds-box slds-theme_info slds-m-bottom_large">
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">Child Component</h2>
+            <c:ChildAura parentMessage="{!v.parentMessage}" aura:id="childComponent"/>
+        </div>
+        
+        <!-- Messages from Child Section -->
+        <div class="slds-box slds-theme_shade">
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">Messages Received from Child</h2>
+            
+            <div class="slds-box slds-theme_alert-texture slds-m-bottom_medium">
+                <p><strong>Child Message:</strong></p>
+                <p class="slds-text-color_error">
+                    <aura:if isTrue="{!v.childMessage}">
+                        {!v.childMessage}
+                        <aura:set attribute="else">
+                            <em>Waiting for child message...</em>
+                        </aura:set>
+                    </aura:if>
+                </p>
+            </div>
+            
+            <div class="slds-box slds-theme_alert-texture">
+                <p><strong>Child Counter Value:</strong></p>
+                <p class="slds-text-color_warning">{!v.childCount}</p>
+            </div>
+        </div>
+    </div>
+</aura:component>

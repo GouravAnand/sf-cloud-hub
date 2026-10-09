@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Event fired from Child component to Parent component">
+    <aura:attribute name="message" type="String" description="Message from child"/>
+    <aura:attribute name="counter" type="Integer" description="Counter value from child"/>
+</aura:event>

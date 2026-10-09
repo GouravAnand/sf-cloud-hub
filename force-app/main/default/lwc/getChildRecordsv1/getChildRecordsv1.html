@@ -1,0 +1,26 @@
+<template>
+    <div>
+        <lightning-input
+            label="Account Name"
+            value={accountName}
+            onchange={handleAccountNameChange}
+        ></lightning-input>
+        <template if:true={contacts}>
+            <ul class="slds-var-m-top_x-small">
+                <template for:each={contacts} for:item="contact">
+                    <li key={contact.Id}>
+                        <div class="slds-var-p-vertical_xx-small">
+                            <!--add a select element to select the contact and display the selected contact's details-->
+                            <p>{contact.Name}</p>
+                            <p>Email: {contact.Email}</p>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:true={error}>
+            <p class="slds-text-color_error">{error}</p>
+        </template>
+    </div>
+    
+</template>
